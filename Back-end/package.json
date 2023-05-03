@@ -1,0 +1,25 @@
+{
+  "name": "doacoes-servicos",
+  "version": "1.0.0",
+  "description": "Back-end da aplicação de registro e controle de doação - Projeto de extensão da matéria de desenvolvimento web da UniFECAF.",
+  "main": "iniciarServico.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "iniciar-servico": "nodemon ./iniciarServico.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kaleo-Stark/FECAF-projeto-web-doacao.git"
+  },
+  "author": "Kaleo Stark",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kaleo-Stark/FECAF-projeto-web-doacao/issues"
+  },
+  "homepage": "https://github.com/Kaleo-Stark/FECAF-projeto-web-doacao#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "nodemon": "^2.0.22"
+  }
+}
