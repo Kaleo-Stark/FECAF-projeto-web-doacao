@@ -25,29 +25,40 @@ exports.listar = () => {
                 status: retorno.length ? 200 : 204,
                 listaDeDoacoes: retorno
             });
-        })
-        
-        .catch(erro => { reject(erro) })
+        }).catch(erro => reject(erro) );
     });
 }
 
 exports.salvar = (dadosDoacao) => {
     return new Promise(async (resolve, reject) => {
-        let valores = `"${dadosDoacao.nome}", "${dadosDoacao.telefone}", "${dadosDoacao.ruaAvenida}", "${dadosDoacao.cidade}", "${dadosDoacao.bairro}", "${dadosDoacao.cep}", "${dadosDoacao.numero}", ${dadosDoacao.perecivel}, "${dadosDoacao.descricao}", "${dadosDoacao.disponibilidade}", ${dadosDoacao.coletado}`;
+                let valores             =       `"${dadosDoacao.nome}", `      + `"${dadosDoacao.telefone}", ` +
+        `"${dadosDoacao.ruaAvenida}", ` +      `"${dadosDoacao.cidade}", `     +  `"${dadosDoacao.bairro}", `  +
+           `"${dadosDoacao.cep}", `     +      `"${dadosDoacao.numero}", `     + `${dadosDoacao.perecivel}, `  +
+        `"${dadosDoacao.descricao}", `  + `"${dadosDoacao.disponibilidade}", ` +  `${dadosDoacao.coletado}`    ;
 
         dados.insert(valores).then(doacaoCodigo => {
             resolve({
                 status: 201,
                 doacaoCodigo: doacaoCodigo
             });
-        }).catch(erro => { reject(erro) });
+        }).catch(erro => reject(erro) );
     });
 }
 
 exports.mudarStatus = (doacaoCodigo) => {
-    console.log("Alterar doacao com o codigo:");
+    return new Promise((resolve, reject) => {
+        dados.update(doacaoCodigo).then( () => resolve() )
+        
+        .catch( erro => reject(erro) );
+    });
+}
 
-    console.log(doacaoCodigo);
+exports.verificaExistencia = (codigoDoacao) => {
+    return new Promise((resolve, reject) => {
+        dados.selectPorCodigo(codigoDoacao).then(retorno => {
+            retorno.length > 0 ? resolve(true) : resolve(false);
+        }).catch( erro => reject(erro) );
+    });
 }
 
 exports.validarObjetoRecebido = async (objetoDadosDoacao) => {
@@ -58,14 +69,11 @@ exports.validarObjetoRecebido = async (objetoDadosDoacao) => {
             JSON.stringify(chavesObjetoRececebido) === JSON.stringify(dadosObjetoDoacao.chaves)
         ){
             for await (let chave of dadosObjetoDoacao.chaves){
-                if(!dadosObjetoDoacao.validacao[chave](objetoDadosDoacao[chave])) throw `Valor do parametro ${chave}, invalido!`;
+                if(!dadosObjetoDoacao.validacao[chave](objetoDadosDoacao[chave])) 
+                    throw `Valor do parametro ${chave}, invalido!`;
             }
 
             return true;
         } else throw "Estrutura do objeto nao está correto";
-    }catch(erro){ 
-        console.log(erro);
-
-        return false;
-    }
+    }catch(erro){ return false }
 }

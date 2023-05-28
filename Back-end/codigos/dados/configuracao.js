@@ -29,9 +29,9 @@ async function criarConexao(){
         }
     
         catch(erro){
-            // !!! Colocar no Log
+            console.log(mensagemDeLog(arquivoAtual, "criarConexao", erro));
             
-            reject(mensagemDeLog(arquivoAtual, "criarConexao()", erro)) 
+            reject(erro) 
         }
     });
 }
@@ -41,17 +41,35 @@ exports.select = async () => {
         criarConexao().then(conexao => {
             conexao.query(`SELECT * FROM ${dadosBD.doacaoTabela};`, (error, results, fields) => {
                 if(error) {
-                    // !!! Colocar no Log
+                    console.log(mensagemDeLog(arquivoAtual, "select", erro));
 
                     reject(error);
-                }else{
-                    resolve(results);
-                }
+                }else resolve(results);
 
                 conexao.end();
             });
         }).catch(erro => {
-            // !!! Colocar no Log
+            console.log(mensagemDeLog(arquivoAtual, "select", erro));
+
+            reject(erro);
+        });
+    });
+}
+
+exports.selectPorCodigo = async (doacaoCodigo) => {
+    return new Promise((resolve, reject) => {
+        criarConexao().then(conexao => {
+            conexao.query(`SELECT * FROM ${dadosBD.doacaoTabela} WHERE codigo_unico = ${doacaoCodigo};`, (error, results, fields) => {
+                if(error) {
+                    console.log(mensagemDeLog(arquivoAtual, "selectPorCodigo", erro));
+
+                    reject(error);
+                }else resolve(results);
+
+                conexao.end();
+            });
+        }).catch(erro => {
+            console.log(mensagemDeLog(arquivoAtual, "selectPorCodigo", erro));
 
             reject(erro);
         });
@@ -63,7 +81,7 @@ exports.insert = (valoresASeremSalvos) => {
         criarConexao().then(conexao => {
             conexao.query(`INSERT INTO ${dadosBD.doacaoTabela} (${dadosBD.doacaoCampos}) VALUES (${valoresASeremSalvos});`, (error, results, fields) => {
                 if(error) {
-                    // !!! Colocar no Log
+                    console.log(mensagemDeLog(arquivoAtual, "insert", erro));
 
                     reject(error);        
                 }else resolve(results.insertId);
@@ -71,48 +89,29 @@ exports.insert = (valoresASeremSalvos) => {
                 conexao.end();
             });
         }).catch(erro => {
-            // !!! Colocar no Log
+            console.log(mensagemDeLog(arquivoAtual, "insert", erro));
 
             reject(erro);
         });
     });
 }
 
-exports.update = () => {
-    /*return new Promise((resolve, reject) => {
+exports.update = (doacaoCodigo) => {
+    return new Promise((resolve, reject) => {
         criarConexao().then(conexao => {
-            conexao.query(`SELECT * FROM ${dadosBD.tabelaDocao};`, (error, results, fields) => {
+            conexao.query(`UPDATE ${dadosBD.doacaoTabela} SET coletado = 1 WHERE codigo_unico = ${doacaoCodigo};`, (error, results, fields) => {
                 if(error) {
-                    console.log("erro: " + error); // Colocar log
+                    console.log(mensagemDeLog(arquivoAtual, "update", error));
 
-                    reject(error);        
-                }else{
-                    resolve(results);
-                }
+                    reject(error);    
+                }else resolve();
 
                 conexao.end();
             });
         }).catch(erro => {
-            console.log("erro: " + erro); // Colocar log
+            console.log(mensagemDeLog(arquivoAtual, "update", erro));
 
             reject(erro);
         });
-    });*/
-}
-
-function execSQLQuery(sqlQry, res) { // ......................... Função que cria a conexão com o banco de ddados e recebe a query a ser executa.
-    const connection = mysql.createConnection({
-        host: 'localhost',
-        port: 3306,
-        user: 'kaleostark',
-        password: '',
-        database: 'apiNode'
-    }); // ...................................................... String para conexão com o banco de dados.
-
-    connection.query(sqlQry, (error, results, fields) => { // ... Tenta fazer a conexão com o banco de dados, passando a string de conexão.
-        if(error){ res.json(error); } // ........................ Se houve erro na conexão, ele retorna o erro.
-        else{ res.json(results); } // ........................... Se houve sucesso ele retorna os dados referente ao sucesso.
-
-        connection.end(); // .................................... Finaliza a conexão.
     });
 }
