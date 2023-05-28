@@ -7,4 +7,4 @@ expressRecusosWeb.use    (     cors()     ); // ........ Configura a API para ac
 expressRecusosWeb.use    ( express.json() ); // ........ Configura a API para trabalhar com JSON.
 expressRecusosWeb.listen (     3333       ); // ........ Faz a API escutar a porta '3333' do dispositivo servidor da API.
 
-require('./codigos/rotas/configuracaoInicial')(expressRecusosWeb); // ... Trás as rotas da aplicação e passa a variavel expressRecusosWeb com a instancia do express.
+require('./codigos/rotas/configuracao')(expressRecusosWeb); // ... Trás as rotas da aplicação e passa a variavel expressRecusosWeb com a instancia do express.
