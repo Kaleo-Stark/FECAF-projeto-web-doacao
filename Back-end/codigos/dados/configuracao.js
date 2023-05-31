@@ -1,37 +1,36 @@
-const mysql = require('mysql2');
-const dataHoraAtual = require('../ferramentas/dataHoraAtual');
-const arquivoAtual = "./codigos/dados/configuracao.js";
+const mysql = require('mysql2'); // ................................. Importa a biblioteca com os códigos relacionados ao banco de dados.
+const dataHoraAtual = require('../ferramentas/dataHoraAtual'); // ... Importa as funções de feramenta para pegar a data e hora atual.
+const arquivoAtual = "./codigos/dados/configuracao.js"; // .......... Configura uma variavel com o caminho do arquivo atual para ser utilizado em logs.
 
-const dadosDeConexao = {
-    host: 'localhost',
-    port: 3306,
-    user: '<User do banco de dados aqui>',
-    password: '<Senha do banco de dados aqui>',
-    database: 'fecaf_doacoes'
+const dadosDeConexao = { // .......................... Atribui na variavel dadosDeConexao os dados necessarios para realizar a conexão com o banco de dados.
+    host: 'localhost', // ............................ Host de onde o banco de dados está disponivel.
+    port: 3306, // ................................... Porta de acesso para o banco de dados.
+    user: '<User do banco de dados aqui>', // ........ Usuário a ser utilizado no acesso ao banco de dados.
+    password: '<Senha do banco de dados aqui>', // ... Senha do usuário utilizado para acessar o banco de dados.
+    database: 'fecaf_doacoes' // ..................... Nome do banco de dados que será utilizada pelo serviço.
 };
 
-const dadosBD = {
-    doacaoTabela: "doacao_registro",
-    doacaoCampos: "nome, telefone, ruaAvenida, cidade, bairro, cep, numero, perecivel, descricao, disponibilidade, coletado",
-    doacaoValoresTeste: '"Kaleo Vieira Leite", "(11) 97796-1828", "Antonio Marcos Torres", "Taboão da Serra", "Scândia", "06785-300", "135", false, "Arroz e Feijão", "De segunda a Sexta, das 10 AM às 23 PM", false'
+const dadosBD = { // ...................... Atribui na variavel dadosBD informações para facilitar a manipulação dos dados no banco de dados.
+    doacaoTabela: "doacao_registro", // ... Nome da tabela que será utilizada.
+    doacaoCampos: "nome, telefone, ruaAvenida, cidade, bairro, cep, numero, perecivel, descricao, disponibilidade, coletado", // ... Campos da tabela a serem preenchidos.
 }
 
-function mensagemDeLog (arquivoAtual, funcaoAtual, mensagemDeErro) { 
-    return `${dataHoraAtual.dataHoraAtual()}:\n Arquivo: ${arquivoAtual} >>> Função: ${funcaoAtual} - Erro: ${mensagemDeErro} \n`;
+function mensagemDeLog (arquivoAtual, funcaoAtual, mensagemDeErro) { // ... Função responsavel por criar a mensagem de log em caso de erro.
+    return `${dataHoraAtual.dataHoraAtual()}:\n Arquivo: ${arquivoAtual} >>> Função: ${funcaoAtual} - Erro: ${mensagemDeErro} \n`; // ... Retorna a mensagem utilizando as informações passadas para a função.
 }
 
-async function criarConexao(){
-    return new Promise(async (resolve, reject) => {
+async function criarConexao(){ // ................................................ Função responsavel por criar a conexão com o banco de dados.
+    return new Promise(async (resolve, reject) => { // ........................... Devolve uma promessa de retorno.
         try{ 
-            let conexao = await mysql.createConnection(dadosDeConexao);
+            let conexao = await mysql.createConnection(dadosDeConexao); // ....... Solicita e atribui na variavel "conexao" uma conexão com o banco de dados fornecida pela biblioteca mysql2.
 
-            resolve(conexao);
+            resolve(conexao); // ................................................. Devolve a conexão criada.
         }
     
-        catch(erro){
-            console.log(mensagemDeLog(arquivoAtual, "criarConexao", erro));
+        catch(erro){ // .......................................................... Caso de algum erro durante a solicitação de criação de conexão com o banco de dados, executa o bloco de código abaixo.
+            console.log(mensagemDeLog(arquivoAtual, "criarConexao", erro)); // ... Printa no console uma mensagem para descrever o erro.
             
-            reject(erro) 
+            reject(erro) // ...................................................... Retorna o erro.
         }
     });
 }
