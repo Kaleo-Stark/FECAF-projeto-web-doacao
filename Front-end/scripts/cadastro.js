@@ -60,10 +60,6 @@ function alertaCepInvalido(alertar){
     elementosDeControle.spanAlertaCep.style.display = alertar ? "initial" : "none";
 }
 
-function ativarDesativarCarregamento(ativar){
-    document.querySelector(".container-carregamento").style.display = ativar ? "flex" : "none";
-}
-
 function salvarDoacao(){
     let doacaoASerSalva = {
             nome       : elementosDeDados.nome.value            ,

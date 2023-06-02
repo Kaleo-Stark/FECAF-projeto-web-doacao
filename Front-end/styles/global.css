@@ -74,6 +74,8 @@ main > div {
 
 .tamanho-25 { width: 25% }
 
+.tamanho-33 { width: 33.33% }
+
 .tamanho-50 { width: 50% }
 
 .tamanho-100 { width: 100% }
@@ -106,6 +108,47 @@ button {
 
 button:hover { background: linear-gradient(0deg, #00b661, #008d4b) }
 
+.container-carregamento {
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    width: 100%;
+    height: 100vh;
+    background-color: #607d8b80;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-carregamento > img { width: 127px }
+
+.container-carregamento > span {
+    color: aliceblue;
+    font-size: 1em;
+    font-weight: 700;
+    text-align: center;
+    text-shadow: 0px 1px 1px #0000008f;
+    animation: mudar-cor 2s infinite
+}
+  
+@keyframes mudar-cor {
+    0% { color: #808080; }
+    50% { color: white; }
+    100% { color: #808080; }
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    background-color: b0b6bf24;
+}
+
+::-webkit-scrollbar-track { background: transparent }
+
+::-webkit-scrollbar-thumb { background: #b1b7bf }
+
+::-webkit-scrollbar-thumb:hover { background: #555 }
+
 @media (max-width: 800px) { 
     header > a { margin-left: -83%; font-size: 37px; margin-bottom: 10px; }
 
@@ -119,14 +162,3 @@ button:hover { background: linear-gradient(0deg, #00b661, #008d4b) }
 
     .tamanho-100 { width: 100% }
 }
-
-::-webkit-scrollbar {
-    width: 5px;
-    background-color: b0b6bf24;
-}
-
-::-webkit-scrollbar-track { background: transparent }
-
-::-webkit-scrollbar-thumb { background: #b1b7bf }
-
-::-webkit-scrollbar-thumb:hover { background: #555 }

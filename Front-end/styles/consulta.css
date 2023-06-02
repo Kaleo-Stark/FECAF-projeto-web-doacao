@@ -1,0 +1,42 @@
+ul {
+    list-style: none;
+    padding-top: 7px;
+}
+
+li { 
+    border: 1px solid #afafaf; 
+    border-radius: 4px;
+    border: 1px solid #afafaf;
+    padding-bottom: 8px;
+    margin-bottom: 17px;
+}
+
+li > div { margin: 12px 14px 0px 14px }
+
+label { 
+    color: #071a2c;
+    font-size: 1em;
+    font-weight: 700;
+    margin: 7px 7px 3px 7px;
+}
+
+label > span {
+    font-weight: 400;
+    margin-left: 3px;
+}
+
+p { 
+    margin: 0px 7px 5px 7px;
+    color: #262626;
+}
+
+button { 
+    height: 33px; 
+    font-size: 1em;
+    margin: 6px;
+}
+
+button:disabled {
+    background: #afafaf82 !important;
+    color: #004486;
+}
