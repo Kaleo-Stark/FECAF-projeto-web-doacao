@@ -4,11 +4,113 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./styles/global.css">
-    <script src="./scripts/global.js"></script>
+    <title>UniFECAF - Doação Web</title>
+    <link rel="stylesheet" href="../styles/global.css">
+    <link rel="stylesheet" href="../styles/cadastro.css">
+    <script src="../scripts/global.js"></script>
+    <script src="../scripts/cadastro.js"></script>
 </head>
 <body>
-    
+    <header>
+        <a href="../index.html">←
+            <span>Voltar</span>
+        </a>
+
+        <img src="../arquivos/UniFECAf-Logo.png" alt="Logo da unifecaf">
+
+        <span>Doações</span>
+    </header>
+
+    <main>
+        <div class="container-dados">
+            <div class="linha">
+                <div class="coluna tamanho-50">
+                    <label for="nome">Nome</label>
+                    <input id="nome" type="text" placeholder="Digite aqui seu nome">
+                </div>
+
+                <div class="coluna tamanho-50">
+                    <label for="telefone">Telefone</label>
+                    <input id="telefone" type="text" placeholder="(00) 00000-0000">
+                </div>
+            </div>
+
+            <div class="linha">
+                <div class="coluna tamanho-25">
+                    <label for="cep">CEP <span>CEP não encontrado!</span></label>
+                    <input id="cep" type="text" placeholder="00000-000" onkeyup="alertaCepInvalido(false)">
+                </div>
+
+                <div class="coluna tamanho-25 itens-abaixo">
+                    <button onclick="consultarCEP()" class="botao-via-cep">Consultar CEP</button>
+                </div>
+
+                <div class="coluna tamanho-25">
+                    <label for="numero">Número</label>
+                    <input id="numero" type="text" placeholder="N° 000">
+                </div>
+
+                <div class="coluna tamanho-25">
+                    <label for="uf">UF</label>
+                    <input id="uf" type="text" placeholder="AA">
+                </div>
+            </div>
+
+            <div class="linha">
+                <div class="coluna tamanho-100">
+                    <label for="ruaAvenida">Rua/Avenida</label>
+                    <input id="ruaAvenida" type="text" placeholder="Digite aqui o nome da sua rua ou avenida">
+                </div>
+            </div>
+
+            <div class="linha">
+                <div class="coluna tamanho-50">
+                    <label for="cidade">Cidade</label>
+                    <input id="cidade" type="text" placeholder="Digite aqui sua cidade">
+                </div>
+
+                <div class="coluna tamanho-50">
+                    <label for="bairro">Bairro</label>
+                    <input id="bairro" type="text" placeholder="Digite aqui seu bairro">
+                </div>
+            </div>
+
+            <div class="linha">
+                <div class="coluna tamanho-50">
+                    <label for="perecivel">Tipo de doação</label>
+                    <select id="perecivel">
+                        <option value="">Selecione se a doação é perecivel ou não</option>
+
+                        <option value="true">Perecivel</option>
+
+                        <option value="false">Não perecivel</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="linha">
+                <div class="coluna tamanho-100">
+                    <label for="descricao">Descrição da doção</label>
+                    <textarea id="descricao"></textarea>
+                </div>
+            </div>
+
+            <div class="linha">
+                <div class="coluna tamanho-100">
+                    <label for="disponibilidade">Disponibilidade de retirada</label>
+                    <textarea id="disponibilidade"></textarea>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <button onclick="salvarDoacao()">Salvar solicitação de retirada</button>
+    </footer>
 </body>
+<div class="container-carregamento">
+    <img src="../arquivos/loading.gif" alt="Imagem de carregamento">
+
+    <span>Aguarde só um<br>pouquinho ;)</span>
+</div>
 </html>

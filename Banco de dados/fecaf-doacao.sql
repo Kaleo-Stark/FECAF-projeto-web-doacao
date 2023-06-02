@@ -18,3 +18,5 @@ CREATE TABLE doacao_registro ( -- ........................ Cria a tabela doacao_
     disponibilidade text, -- ............................. - Texto sobre a disponibilidade de retirada da doacao;
     coletado        boolean -- ........................... - Se a doacao ja foi retirada ou nao.
 );
+
+SELECT * FROM doacao_registro;
