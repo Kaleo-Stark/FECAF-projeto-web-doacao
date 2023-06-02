@@ -1,0 +1,1 @@
+function navegarCadastroDeDoacao(){ window.location.href = "./paginas/cadastro.html"; }

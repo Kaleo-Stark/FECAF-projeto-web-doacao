@@ -1,4 +1,4 @@
-DROP DATABASE fecaf_doacoes; -- ............................... Apaga o banco de dados fecaf_doacoes.
+-- DROP DATABASE fecaf_doacoes; -- ............................ Apaga o banco de dados fecaf_doacoes.
 
 CREATE DATABASE fecaf_doacoes; -- ............................. Cria o banco de dados fecaf_doacoes.
 

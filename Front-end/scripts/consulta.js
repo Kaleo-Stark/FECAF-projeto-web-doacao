@@ -57,7 +57,7 @@ function criarBotao(texto) {
 }
 
 function buscarListaDeDoacoes() {
-    fetch("http://localhost:3333/doacoes", {method: 'GET'}).then(response => {
+    fetch("http://192.168.15.17:3333/doacoes", {method: 'GET'}).then(response => {
         if(response.status == 204){
             alert("Não há lista de doações para ser vista.");
 
